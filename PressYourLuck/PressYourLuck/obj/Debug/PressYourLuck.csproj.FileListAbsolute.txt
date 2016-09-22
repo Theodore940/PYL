@@ -1,0 +1,8 @@
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.exe
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.pdb
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.PressYourLuckGameForm.resources
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.Properties.Resources.resources
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.GenerateResource.Cache
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.exe
+C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.pdb
