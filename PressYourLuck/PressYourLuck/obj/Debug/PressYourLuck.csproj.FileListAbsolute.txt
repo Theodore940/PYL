@@ -6,3 +6,16 @@ C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYour
 C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.GenerateResource.Cache
 C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.exe
 C:\Users\nathan.ho\Documents\Visual Studio 2008\Projects\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.pdb
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.exe
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.pdb
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.exe
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.pdb
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csprojResolveAssemblyReference.cache
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.PressYourLuckGameForm.resources
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.Properties.Resources.resources
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.GenerateResource.Cache
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\bin\Debug\Interop.WMPLib.dll
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\Interop.WMPLib.dll
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.ResolveComReference.cache

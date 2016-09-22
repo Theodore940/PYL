@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-//using WMPLib;
+using WMPLib;
 
 namespace PressYourLuck
 {
@@ -16,21 +16,21 @@ namespace PressYourLuck
     {
         private Random randomNumber = new Random();
         private DataStructureClass dataStructureClass = new DataStructureClass();
-        //WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
-        Random random = new Random();
+        WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
         public PressYourLuckGameForm()
         {
 
             
             InitializeComponent();
             PictureBox[] picBox = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, pictureBox10 };
-            for (int i =0; i< 10;i++)
-            picBox[i].Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Whammy.gif");
-            //for (int i=0; i<17; i++)
-               // picBoxes[i] = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Whammy.gif"); 
-            
-           // wplayer.URL = "";
-            //wplayer.controls.play();
+            for (int i = 0; i < 10; i++)
+            {
+                int face = 1 + randomNumber.Next(9);
+                picBox[i].Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\Whammy"+face+".png");
+
+            }
+            wplayer.URL = "Game Show Music.mp3";
+            wplayer.controls.play();
             
         }
         public void DisplayBoard(PictureBox pictureBox)
@@ -42,7 +42,7 @@ namespace PressYourLuck
         private void startGame_Click(object sender, EventArgs e)
         {
             //DisplayBoard(pictureBox1);
-           // wplayer.controls.stop();
+            wplayer.controls.stop();
             Name1.Text = playerNameText1.Text.ToUpper();
             Name2.Text = playerNameText2.Text.ToUpper();
             Name3.Text = playerNameText3.Text.ToUpper();
@@ -76,22 +76,6 @@ namespace PressYourLuck
             }
 
         }
-
-        //private void timer1_Tick(object sender, EventArgs e)
-        //{
-        //    PictureBox[] picBox = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, pictureBox4,pictureBox5,pictureBox6,pictureBox7,pictureBox8,pictureBox9,pictureBox10 };
-        //    int index = random.Next(0, 9);
-        //    if (picBox[index].Visible == true)
-        //        picBox[index].Visible = false;
-        //    else
-        //        picBox[index].Visible = true;
-        //}
-
-
-
-
-
-
 
 
 
