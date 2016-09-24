@@ -18,3 +18,8 @@ C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\bin\Debug\AxInterop.WMPLib.d
 C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\Interop.WMPLib.dll
 C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.ResolveComReference.cache
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\Interop.WMPLib.dll
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.ResolveComReference.cache
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.exe
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.pdb
