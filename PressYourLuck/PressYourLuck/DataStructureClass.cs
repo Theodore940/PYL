@@ -10,7 +10,7 @@ namespace PressYourLuck
         private struct player
         {
             public int score, spins, passedSpins;
-            public string ans; //place to store a players answer (might not be needed)
+            public string name; //place to store a players answer (might not be needed)
         }
 
         private int numPlayers;
@@ -54,11 +54,50 @@ namespace PressYourLuck
                 else{ return "";}
             }
 
-            // TODO: initialize playerData 
+            
+            public string getPlayerName(int playerID)
+            {
+                return playerData[playerID-1].name;
+            }
+
+            public int getPlayerScore (int playerID)
+            {
+                return playerData[playerID-1].score;
+            }
+
+            public int getPlayerSpins(int playerID)
+            {
+                return playerData[playerID-1].spins;
+            }
+
+            public int getPlayerPassedSpins(int playerID)
+            {
+                return playerData[playerID-1].passedSpins;
+            }
+
+            public void addPlayerScore(int playerID, int addScore)
+            {
+                playerData[playerID-1].score += addScore;
+            }
+            
+            public void setPlayerName(int playerID, string playerName)
+            {
+                playerData[palyerID - 1].name = playerName;
+            }
+
+            public void addPlayerSpins(int playerID, int numSpins)
+            {
+                playerData[playerID-1].spins += numSpins;
+            }
+            
+            public addPlayerPassedSpins(int playerID, int numSpins)
+            {
+                playerData[playerID-1].passedSpins += numSpins;
+            }
+            //properties
             
 
         }
-        //properties
         
     }
 }
