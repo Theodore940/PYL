@@ -10,7 +10,7 @@ namespace PressYourLuck
         private struct player
         {
             public int score, spins, passedSpins;
-            public string name; //place to store a players answer (might not be needed)
+            public string name;
         }
 
         private int numPlayers;
@@ -21,83 +21,81 @@ namespace PressYourLuck
         public DataStructureClass(int players)
         {
             numPlayers = players;
-            
             playerData = new player[numPlayers];
+            questions = new List<string>{};
+            answers = new List<string>{};
+
             string line;
+
             //load question and answers from file
             System.IO.StreamReader fileQA = new System.IO.StreamReader("Questions.txt");
 
-
-            //TODO: make sure this doesn't break because a Q doesn't have an A
             while ((line = fileQA.ReadLine()) != null)
             {
                 questions.Add(line);
                 line = fileQA.ReadLine();
                 answers.Add(line);
-
             }
-            public string getQuestion(int index)
-            {
-                if(index >= 0 && index < questions.Capacity)
-                {
-                    return questions[index];
-                }
-                else { return "";}
-            }
-
-            public string getAnswer(int index)
-            {
-                if(index >= 0 && < answers.Capacity)
-                {
-                    return answers[index]
-                }
-                else{ return "";}
-            }
-
-            
-            public string getPlayerName(int playerID)
-            {
-                return playerData[playerID-1].name;
-            }
-
-            public int getPlayerScore (int playerID)
-            {
-                return playerData[playerID-1].score;
-            }
-
-            public int getPlayerSpins(int playerID)
-            {
-                return playerData[playerID-1].spins;
-            }
-
-            public int getPlayerPassedSpins(int playerID)
-            {
-                return playerData[playerID-1].passedSpins;
-            }
-
-            public void addPlayerScore(int playerID, int addScore)
-            {
-                playerData[playerID-1].score += addScore;
-            }
-            
-            public void setPlayerName(int playerID, string playerName)
-            {
-                playerData[palyerID - 1].name = playerName;
-            }
-
-            public void addPlayerSpins(int playerID, int numSpins)
-            {
-                playerData[playerID-1].spins += numSpins;
-            }
-            
-            public addPlayerPassedSpins(int playerID, int numSpins)
-            {
-                playerData[playerID-1].passedSpins += numSpins;
-            }
-            //properties
-            
-
         }
-        
+
+        public string getQuestion(int index)
+        {
+            if(index >= 0 && index < questions.Capacity)
+            {
+                return questions[index];
+            }
+            else { return "";}
+        }
+
+        public string getAnswer(int index)
+        {
+            if(index >= 0 && index < answers.Capacity)
+            {
+                return answers[index];
+            }
+            else{ return "";}
+        }
+
+            
+        public string getPlayerName(int playerID)
+        {
+            return playerData[playerID-1].name;
+        }
+
+        public int getPlayerScore (int playerID)
+        {
+            return playerData[playerID-1].score;
+        }
+
+        public int getPlayerSpins(int playerID)
+        {
+            return playerData[playerID-1].spins;
+        }
+
+        public int getPlayerPassedSpins(int playerID)
+        {
+            return playerData[playerID-1].passedSpins;
+        }
+
+        public void addPlayerScore(int playerID, int addScore)
+        {
+            playerData[playerID-1].score += addScore;
+        }
+            
+        public void setPlayerName(int playerID, string playerName)
+        {
+            playerData[playerID - 1].name = playerName;
+        }
+
+        public void addPlayerSpins(int playerID, int numSpins)
+        {
+            playerData[playerID-1].spins += numSpins;
+        }
+            
+        public void addPlayerPassedSpins(int playerID, int numSpins)
+        {
+            playerData[playerID-1].passedSpins += numSpins;
+        }
+                
     }
 }
