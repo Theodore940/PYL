@@ -28,7 +28,7 @@ namespace PressYourLuck
             string line;
 
             //load question and answers from file
-            System.IO.StreamReader fileQA = new System.IO.StreamReader("Questions.txt");
+            System.IO.StreamReader fileQA = new System.IO.StreamReader("luckfile.txt");
 
             while ((line = fileQA.ReadLine()) != null)
             {
