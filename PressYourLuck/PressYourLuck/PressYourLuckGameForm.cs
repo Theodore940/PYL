@@ -57,18 +57,35 @@ namespace PressYourLuck
             Name1.Text = playerNameText1.Text.ToUpper();
             Name2.Text = playerNameText2.Text.ToUpper();
             Name3.Text = playerNameText3.Text.ToUpper();
+
             twoPlayer.Enabled = false;
             threePlayer.Enabled = false;
             startGame.Enabled = false;
+            var results = MessageBox.Show("Would you like to learn how to play before you begin?", "Welcome to Press Your Luck", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (results == DialogResult.Yes)
+            {
+                string text = System.IO.File.ReadAllText("Game FAQ.txt");
+                MessageBox.Show(text,"Game FAQ");
+            }
+            else if (results == DialogResult.Yes)
+            {
+                this.Close();
+            }
             DataStructureClass dataStructureClass = new DataStructureClass(player);
             dataStructureClass.setPlayerName(1,Name1.Text);
-            question.Text=dataStructureClass.getQuestion(1);
-            Answer.Text = dataStructureClass.getPlayerName(1);
+            dataStructureClass.setPlayerName(2, Name2.Text);
+            if(player==3)
+                dataStructureClass.setPlayerName(3, Name3.Text);
+            int randomNum = randomNumber.Next(22);
+            question.Text=dataStructureClass.getQuestion(randomNum);
+            Answer.Text = dataStructureClass.getAnswer(randomNum);
 
         }
 
         private void twoPlayer_CheckedChanged(object sender, EventArgs e)
         {
+            playerNameText1.Enabled = true;
+            playerNameText2.Enabled = true;
             playerNameText3.Enabled = false;
             groupBox5.Visible = false;
             player = 2;
@@ -76,6 +93,8 @@ namespace PressYourLuck
 
         private void threePlayer_CheckedChanged(object sender, EventArgs e)
         {
+            playerNameText1.Enabled = true;
+            playerNameText2.Enabled = true;
             playerNameText3.Enabled = true;
             groupBox5.Visible = true;
             player = 3;
@@ -157,6 +176,11 @@ namespace PressYourLuck
         private void player3pass_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void quitGame_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
        
     }

@@ -51,6 +51,8 @@
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
             this.startGame = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.quitGame = new System.Windows.Forms.Button();
+            this.submitAnswer = new System.Windows.Forms.Button();
             this.newGame = new System.Windows.Forms.Button();
             this.playerNameText3 = new System.Windows.Forms.TextBox();
             this.playerNameText2 = new System.Windows.Forms.TextBox();
@@ -63,6 +65,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.player1stop = new System.Windows.Forms.Button();
             this.player1spin = new System.Windows.Forms.Button();
             this.player1pass = new System.Windows.Forms.Button();
@@ -72,6 +75,7 @@
             this.Score1 = new System.Windows.Forms.Label();
             this.Name1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.player2stop = new System.Windows.Forms.Button();
             this.player2pass = new System.Windows.Forms.Button();
             this.player2spin = new System.Windows.Forms.Button();
@@ -93,10 +97,7 @@
             this.Trivia = new System.Windows.Forms.GroupBox();
             this.Answer = new System.Windows.Forms.Label();
             this.question = new System.Windows.Forms.Label();
-            this.submitAnswer = new System.Windows.Forms.Button();
-            this.quitGame = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -389,6 +390,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controls";
             // 
+            // quitGame
+            // 
+            this.quitGame.Location = new System.Drawing.Point(12, 188);
+            this.quitGame.Name = "quitGame";
+            this.quitGame.Size = new System.Drawing.Size(170, 44);
+            this.quitGame.TabIndex = 30;
+            this.quitGame.Text = "Quit Game";
+            this.quitGame.UseVisualStyleBackColor = true;
+            this.quitGame.Click += new System.EventHandler(this.quitGame_Click);
+            // 
+            // submitAnswer
+            // 
+            this.submitAnswer.Location = new System.Drawing.Point(12, 138);
+            this.submitAnswer.Name = "submitAnswer";
+            this.submitAnswer.Size = new System.Drawing.Size(170, 44);
+            this.submitAnswer.TabIndex = 29;
+            this.submitAnswer.Text = "Submit Answer";
+            this.submitAnswer.UseVisualStyleBackColor = true;
+            // 
             // newGame
             // 
             this.newGame.Location = new System.Drawing.Point(12, 85);
@@ -402,6 +422,7 @@
             // 
             // playerNameText3
             // 
+            this.playerNameText3.Enabled = false;
             this.playerNameText3.Location = new System.Drawing.Point(278, 160);
             this.playerNameText3.Margin = new System.Windows.Forms.Padding(6);
             this.playerNameText3.Name = "playerNameText3";
@@ -410,6 +431,7 @@
             // 
             // playerNameText2
             // 
+            this.playerNameText2.Enabled = false;
             this.playerNameText2.Location = new System.Drawing.Point(278, 120);
             this.playerNameText2.Margin = new System.Windows.Forms.Padding(6);
             this.playerNameText2.Name = "playerNameText2";
@@ -418,6 +440,7 @@
             // 
             // playerNameText1
             // 
+            this.playerNameText1.Enabled = false;
             this.playerNameText1.Location = new System.Drawing.Point(278, 76);
             this.playerNameText1.Margin = new System.Windows.Forms.Padding(6);
             this.playerNameText1.Name = "playerNameText1";
@@ -457,13 +480,11 @@
             // threePlayer
             // 
             this.threePlayer.AutoSize = true;
-            this.threePlayer.Checked = true;
             this.threePlayer.Location = new System.Drawing.Point(334, 35);
             this.threePlayer.Margin = new System.Windows.Forms.Padding(6);
             this.threePlayer.Name = "threePlayer";
             this.threePlayer.Size = new System.Drawing.Size(111, 30);
             this.threePlayer.TabIndex = 21;
-            this.threePlayer.TabStop = true;
             this.threePlayer.Text = "3-Player";
             this.threePlayer.UseVisualStyleBackColor = true;
             this.threePlayer.CheckedChanged += new System.EventHandler(this.threePlayer_CheckedChanged);
@@ -531,6 +552,13 @@
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Player1";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(66, 57);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(220, 31);
+            this.textBox1.TabIndex = 31;
             // 
             // player1stop
             // 
@@ -643,6 +671,13 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Player2";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(74, 57);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(220, 31);
+            this.textBox2.TabIndex = 34;
+            // 
             // player2stop
             // 
             this.player2stop.Location = new System.Drawing.Point(74, 290);
@@ -736,6 +771,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.textBox3);
             this.groupBox5.Controls.Add(this.player3stop);
             this.groupBox5.Controls.Add(this.player3spin);
             this.groupBox5.Controls.Add(this.player3pass);
@@ -875,37 +911,12 @@
             this.question.TabIndex = 0;
             this.question.Text = "Question";
             // 
-            // submitAnswer
+            // textBox3
             // 
-            this.submitAnswer.Location = new System.Drawing.Point(12, 138);
-            this.submitAnswer.Name = "submitAnswer";
-            this.submitAnswer.Size = new System.Drawing.Size(170, 44);
-            this.submitAnswer.TabIndex = 29;
-            this.submitAnswer.Text = "Submit Answer";
-            this.submitAnswer.UseVisualStyleBackColor = true;
-            // 
-            // quitGame
-            // 
-            this.quitGame.Location = new System.Drawing.Point(12, 188);
-            this.quitGame.Name = "quitGame";
-            this.quitGame.Size = new System.Drawing.Size(170, 44);
-            this.quitGame.TabIndex = 30;
-            this.quitGame.Text = "Quit Game";
-            this.quitGame.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(116, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 31);
-            this.textBox1.TabIndex = 31;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(98, 57);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 31);
-            this.textBox2.TabIndex = 34;
+            this.textBox3.Location = new System.Drawing.Point(78, 57);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(220, 31);
+            this.textBox3.TabIndex = 33;
             // 
             // PressYourLuckGameForm
             // 
@@ -950,6 +961,7 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
             this.Trivia.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1025,6 +1037,7 @@
         private System.Windows.Forms.Button submitAnswer;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 
