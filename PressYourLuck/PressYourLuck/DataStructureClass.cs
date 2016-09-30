@@ -10,7 +10,7 @@ namespace PressYourLuck
         private struct player
         {
             public int score, spins, passedSpins;
-            public string name;
+            public string name, ans;
         }
 
         private int numPlayers;
@@ -32,9 +32,10 @@ namespace PressYourLuck
 
             while ((line = fileQA.ReadLine()) != null)
             {
-                questions.Add(line);
+                
+                questions.Add(line.ToUpper());
                 line = fileQA.ReadLine();
-                answers.Add(line);
+                answers.Add(line.ToUpper());
             }
         }
 
@@ -55,8 +56,7 @@ namespace PressYourLuck
             }
             else{ return "";}
         }
-
-            
+    
         public string getPlayerName(int playerID)
         {
             return playerData[playerID-1].name;
@@ -77,6 +77,11 @@ namespace PressYourLuck
             return playerData[playerID-1].passedSpins;
         }
 
+        public string getPlayerAns(int playerID)
+        {
+            return playerData[playerID - 1].ans;
+        }
+
         public void addPlayerScore(int playerID, int addScore)
         {
             playerData[playerID-1].score += addScore;
@@ -85,6 +90,11 @@ namespace PressYourLuck
         public void setPlayerName(int playerID, string playerName)
         {
             playerData[playerID - 1].name = playerName;
+        }
+
+        public void setPlayerAnswer(int playerID, string playerAns)
+        {
+            playerData[playerID - 1].ans = playerAns;
         }
 
         public void addPlayerSpins(int playerID, int numSpins)
