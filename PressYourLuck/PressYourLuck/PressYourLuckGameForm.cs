@@ -22,16 +22,13 @@ namespace PressYourLuck
         PictureBox[] picBox = new PictureBox[18];
         Image [] images = new Image[18];
         int[] score = new int[18];
-        int numOfRounds = 3;
+        int numOfRounds = 1;
         int playerCount = 3;
         int playerIDnum = 0;
         private int randomNum;
         public PressYourLuckGameForm()
         {
-
-            
             InitializeComponent();
-
             wplayer.URL = "Game Show Music.mp3";
             wplayer.controls.play();
             for (int i =0; i<18 ;i++)
@@ -41,6 +38,7 @@ namespace PressYourLuck
             score[8] = 1750;
             score[9] = 2250;
         }
+        //
         public void DisplayBoard(PictureBox [] picBox)
         {
             picBox = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, 
@@ -55,18 +53,17 @@ namespace PressYourLuck
 
             }
         }
+        //
         private void gameLogic()
         {
             randomNum = randomNumber.Next(22);
             question.Text = dataStructureClass.getQuestion(randomNum);
-            MessageBox.Show("Player 1 turn to answer the question.","Round 1",MessageBoxButtons.OK ,MessageBoxIcon.Information);
+            MessageBox.Show("Player 1 turn to answer the question.","Round "+numOfRounds,MessageBoxButtons.OK ,MessageBoxIcon.Information);
         }
+        //
         private void startGame_Click(object sender, EventArgs e)
         {
             DisplayBoard(picBox);
-            player1spin.Enabled = true;
-            player2spin.Enabled = true;
-            player3spin.Enabled = true;
             wplayer.controls.stop();
             Name1.Text = playerNameText1.Text.ToUpper();
             Name2.Text = playerNameText2.Text.ToUpper();
@@ -92,12 +89,10 @@ namespace PressYourLuck
             dataStructureClass.setPlayerName(2, Name2.Text);
             if(player==3)
                 dataStructureClass.setPlayerName(3, Name3.Text);
-            dataStructureClass.addPlayerSpins(1, 3);
-            dataStructureClass.addPlayerSpins(2, 1);
             gameLogic();
            
         }
-
+        //
         private void twoPlayer_CheckedChanged(object sender, EventArgs e)
         {
             playerNameText1.Enabled = true;
@@ -109,7 +104,7 @@ namespace PressYourLuck
             playerCount = 2;
             player = 2;
         }
-
+        //
         private void threePlayer_CheckedChanged(object sender, EventArgs e)
         {
             playerNameText1.Enabled = true;
@@ -121,7 +116,7 @@ namespace PressYourLuck
             playerCount = 3;
             player = 3;
         }
-
+        //
         private void Restart_Click(object sender, EventArgs e)
         {
             const string message = "Play Again? ";
@@ -137,10 +132,11 @@ namespace PressYourLuck
             }
 
         }
-
+        //
         private void player1spin_Click(object sender, EventArgs e)
         {
-            if (dataStructureClass.getPlayerSpins(1) > 0)
+            if (dataStructureClass.getPlayerSpins(1) > 0 || 
+                dataStructureClass.getPlayerPassedSpins(1) > 0)
             {
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
@@ -150,8 +146,14 @@ namespace PressYourLuck
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
 
             }
-        }
+            if (dataStructureClass.getPlayerSpins(1) == 0)
+            {
+                player1spin.Enabled = false;
+                player2spin.Enabled = true;
+            }
 
+        }
+        //
         private void player1stop_Click(object sender, EventArgs e)
         {
             wplayer.controls.stop();
@@ -162,15 +164,16 @@ namespace PressYourLuck
             dataStructureClass.addPlayerScore(1, score[face]);
             Score1.Text = dataStructureClass.getPlayerScore(1).ToString();
         }
-
+        //
         private void player1pass_Click(object sender, EventArgs e)
         {
 
         }
-
+        //
         private void player2spin_Click(object sender, EventArgs e)
         {
-            if (dataStructureClass.getPlayerSpins(2) > 0)
+            if (dataStructureClass.getPlayerSpins(2) > 0 || 
+                dataStructureClass.getPlayerPassedSpins(2) > 0)
             {
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
@@ -179,8 +182,12 @@ namespace PressYourLuck
                 dataStructureClass.addPlayerSpins(2, -1);
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
             }
+            if (dataStructureClass.getPlayerSpins(2) == 0)
+            {
+                player2spin.Enabled = false;
+                player3spin.Enabled = true;
+            }
         }
-
         private void player2stop_Click(object sender, EventArgs e)
         {
             wplayer.controls.stop();
@@ -189,17 +196,16 @@ namespace PressYourLuck
             int face = 7 + randomNumber.Next(3);
             pictureBox19.Image = images[face];
             dataStructureClass.addPlayerScore(2, score[face]);
-            Score1.Text = dataStructureClass.getPlayerScore(2).ToString();
+            Score2.Text = dataStructureClass.getPlayerScore(2).ToString();
         }
-
         private void player2pass_Click(object sender, EventArgs e)
         {
 
         }
-
         private void player3spin_Click(object sender, EventArgs e)
         {
-            if (dataStructureClass.getPlayerSpins(3) > 0)
+            if (dataStructureClass.getPlayerSpins(3) > 0 || 
+                dataStructureClass.getPlayerPassedSpins(3) > 0)
             {
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
@@ -209,7 +215,6 @@ namespace PressYourLuck
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
             }
         }
-
         private void player3stop_Click(object sender, EventArgs e)
         {
             wplayer.controls.stop();
@@ -218,9 +223,8 @@ namespace PressYourLuck
             int face = 7 + randomNumber.Next(3);
             pictureBox19.Image = images[face];
             dataStructureClass.addPlayerScore(3, score[face]);
-            Score1.Text = dataStructureClass.getPlayerScore(3).ToString();
+            Score3.Text = dataStructureClass.getPlayerScore(3).ToString();
         }
-
         private void player3pass_Click(object sender, EventArgs e)
         {
 
@@ -233,32 +237,67 @@ namespace PressYourLuck
 
         private void submitAnswer3_Click(object sender, EventArgs e)
         {
-            Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
-            showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}\n Player 3: {2} "
-                , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2), dataStructureClass.getPlayerAns(3));
-            numOfRounds--;
-            Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
-            Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
-            Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
+            if (numOfRounds <= 3)
+            {
+                Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
+                showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}\n Player 3: {2} "
+                    , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2), dataStructureClass.getPlayerAns(3));
+                numOfRounds++;
+                for (int i = 1; i < 4; i++)
+                    dataStructureClass.checkAnswer(i, dataStructureClass.getAnswer(randomNum));
+                Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
+                Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+                Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
+                if (numOfRounds <= 3)
+                {
+                    gameLogic();
+                    playerSubmit.Enabled = true;
+                    playerIDnum = 0;
+                    playerCount = 3;
+                }
+                else
+                {
+                    MessageBox.Show("Time for the big board!");
+                    player1spin.Enabled = true;
+                }
+            }
         }
         private void submitAnswer2_Click(object sender, EventArgs e)
         {
-            Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
-            showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}"
-                , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2));
-            numOfRounds--;
-            Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
-            Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+            if (numOfRounds <= 3)
+            {
+                Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
+                showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}"
+                    , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2));
+                numOfRounds++;
+                for (int i = 1; i < 3; i++)
+                    dataStructureClass.checkAnswer(i, dataStructureClass.getAnswer(randomNum));
+                Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
+                Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+                if (numOfRounds <= 3)
+                {
+                    gameLogic();
+                    playerSubmit.Enabled = true;
+                    playerIDnum = 0;
+                    playerCount = 2;
+                }
+                else
+                {
+                    MessageBox.Show("Time for the big board!");
+                    player1spin.Enabled = true;
+                }
+            }
         }
+
         private void playerSubmit_Click(object sender, EventArgs e)
         {
             playerIDnum++;
             dataStructureClass.setPlayerAnswer(playerIDnum, playerAnswers.Text.ToUpper());
             playerAnswers.Text = string.Empty;
             if (playerIDnum == 1)
-                MessageBox.Show("Player 2 turn to answer the question.", "Round 1", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Player 2 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (playerIDnum == 2)
-                MessageBox.Show("Player 3 turn to answer the question.", "Round 1", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Player 3 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
             
             playerCount--;
             if (playerCount == 0)
