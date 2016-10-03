@@ -100,12 +100,6 @@ namespace PressYourLuck
 
             if(player==3)
                 dataStructureClass.setPlayerName(3, Name3.Text);
-<<<<<<< HEAD
-=======
-
-            dataStructureClass.addPlayerSpins(1, 3);
-            dataStructureClass.addPlayerSpins(2, 1);
->>>>>>> cf2e9fec28263f1189a55b924e55a9cdceff79df
             gameLogic();
            
         }

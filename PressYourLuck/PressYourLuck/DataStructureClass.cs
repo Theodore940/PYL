@@ -44,11 +44,8 @@ namespace PressYourLuck
         //as ans
         public void checkAnswer(int PlayerId, string answer)
         {
-<<<<<<< HEAD
-            if (playerData[PlayerId - 1].ans == answer)
-=======
             if(playerData[PlayerId-1].ans == answer)
->>>>>>> cf2e9fec28263f1189a55b924e55a9cdceff79df
+
             {
                 addPlayerSpins(PlayerId, 3); //3 spins for correct answer
             }
@@ -58,10 +55,7 @@ namespace PressYourLuck
             }
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> cf2e9fec28263f1189a55b924e55a9cdceff79df
         public string getQuestion(int index)
         {
             index = index % questions.Capacity;
