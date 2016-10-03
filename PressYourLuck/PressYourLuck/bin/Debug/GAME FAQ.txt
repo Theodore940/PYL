@@ -1,1 +1,21 @@
 Instructions on how to play!
+
+The game will be split up into 2 parts Trivia and Big Board each part will have 2 rounds. 
+Once the first round is over the second round will begin. Good Luck!
+
+*Trivia round:
+-Consist of 4 questions where each player will have a chance to answer the questions.
+ 
+-3 Points will be rewarded to correct answers and 1 point will be rewarded for incorrect answers.
+
+-Each player will take turns answering the question and hit enter after all player answer the 
+question you will then hit submit answer button. It will display previous correct answer and players
+answer as well as displaying the new question for next round.
+
+-After answering 4 questions trivia round is over you will then have a chance to spin the bigboard for prizes.
+
+*Big board round: 
+
+-Player with the fewest spin will start the big board round.
+
+-Any passed spins will go to the person with the highest amount of money.
