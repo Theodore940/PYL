@@ -37,3 +37,11 @@ C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\Press
 \\psf\Home\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.GenerateResource.Cache
 \\psf\Home\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csprojResolveAssemblyReference.cache
 C:\Users\Ti\Desktop\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csprojResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.exe
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\bin\Debug\PressYourLuck.pdb
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\bin\Debug\Interop.WMPLib.dll
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csprojResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.PressYourLuckGameForm.resources
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.Properties.Resources.resources
+C:\Users\Ryan\Documents\GitRepos\PYL\PressYourLuck\PressYourLuck\obj\Debug\PressYourLuck.csproj.GenerateResource.Cache
