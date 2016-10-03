@@ -1,4 +1,14 @@
-﻿using System;
+//**************************************************************
+//                   Project #1 Press Your Luck
+//                   Name: Nathan Ho & Ryan Luig
+//                   CPL Date: 10/06/2016
+//***************************************************************
+//      Place your general program documentation here. It should
+//      be quite a few lines explaining the programs duty carefully.
+//      It should also indicate how to run the program and data
+//      input format, filenames etc
+//*****************************************************************
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
