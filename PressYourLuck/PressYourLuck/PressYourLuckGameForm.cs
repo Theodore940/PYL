@@ -172,7 +172,18 @@ namespace PressYourLuck
         }
         private void player1pass_Click(object sender, EventArgs e)
         {
-
+            if (dataStructureClass.getPlayerScore(2) >= dataStructureClass.getPlayerScore(3)) //player 2 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(2, dataStructureClass.getPlayerSpins(1));
+                Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
+            }
+            else //player 3 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(1));
+                Passed2.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
+            }
+            dataStructureClass.addPlayerSpins(1, -(dataStructureClass.getPlayerSpins(1)));
+            Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
         }
         private void player2spin_Click(object sender, EventArgs e)
         {
@@ -205,7 +216,19 @@ namespace PressYourLuck
         }
         private void player2pass_Click(object sender, EventArgs e)
         {
-
+            if (dataStructureClass.getPlayerScore(1) >= dataStructureClass.getPlayerScore(3)) //player 1 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(1, dataStructureClass.getPlayerSpins(2));
+                Passed1.Text = dataStructureClass.getPlayerPassedSpins(1).ToString();
+            }
+            else //Player 3 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(1));
+                Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
+            }
+            dataStructureClass.addPlayerPassedSpins(2, -(dataStructureClass.getPlayerSpins(2)));
+            Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+            
         }
         private void player3spin_Click(object sender, EventArgs e)
         {
@@ -233,7 +256,18 @@ namespace PressYourLuck
         }
         private void player3pass_Click(object sender, EventArgs e)
         {
-     
+            if (dataStructureClass.getPlayerScore(2) >= dataStructureClass.getPlayerScore(1)) //player 2 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(2, dataStructureClass.getPlayerSpins(3));
+                Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
+            }
+            else //player 1 has highest score
+            {
+                dataStructureClass.addPlayerPassedSpins(1, dataStructureClass.getPlayerSpins(3));
+                Passed1.Text = dataStructureClass.getPlayerPassedSpins(1).ToString();
+            }
+            dataStructureClass.addPlayerSpins(3, -(dataStructureClass.getPlayerSpins(3)));
+            Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
         }
         //button that quits the game
         private void quitGame_Click(object sender, EventArgs e)

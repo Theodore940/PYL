@@ -21,7 +21,7 @@ namespace PressYourLuck
         public DataStructureClass(int players)
         {
             numPlayers = players;
-            playerData = new player[numPlayers];
+            playerData = new player[3];
             questions = new List<string>{};
             answers = new List<string>{};
 
