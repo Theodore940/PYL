@@ -150,7 +150,14 @@ namespace PressYourLuck
                 wplayer.controls.play();
                 player1spin.Visible = false;
                 player1stop.Visible = true;
-                dataStructureClass.addPlayerSpins(1, -1);
+                if(dataStructureClass.getPlayerPassedSpins(1) > 0)
+                {
+                    dataStructureClass.addPlayerPassedSpins(1, -1);
+                }
+                else
+                {
+                    dataStructureClass.addPlayerSpins(1, -1);
+                }
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
 
             }
@@ -197,7 +204,14 @@ namespace PressYourLuck
                 wplayer.controls.play();
                 player2spin.Visible = false;
                 player2stop.Visible = true;
-                dataStructureClass.addPlayerSpins(2, -1);
+                if(dataStructureClass.getPlayerPassedSpins(2) > 0)
+                {
+                    dataStructureClass.addPlayerPassedSpins(2, -1);
+                }
+                else
+                {
+                    dataStructureClass.addPlayerSpins(2, -1);
+                }
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
             }
             if (dataStructureClass.getPlayerSpins(2) == 0)
@@ -243,7 +257,14 @@ namespace PressYourLuck
                 wplayer.controls.play();
                 player3spin.Visible = false;
                 player3stop.Visible = true;
-                dataStructureClass.addPlayerSpins(3, -1);
+                if(dataStructureClass.getPlayerPassedSpins(3) > 0)
+                {
+                    dataStructureClass.addPlayerPassedSpins(3, -1);
+                }
+                else
+                {
+                    dataStructureClass.addPlayerSpins(3, -1);
+                }
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
             }
         }
