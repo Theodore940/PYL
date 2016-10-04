@@ -20,6 +20,7 @@ namespace PressYourLuck
         private List<string> answers;
         private player[] playerData;
         public Image[] images = new Image[18];
+        private int totalSpins;
 
         public DataStructureClass(int players)
         {
@@ -81,7 +82,19 @@ namespace PressYourLuck
             }
             else{ return "";}
         }
+        public int getSpins()
+        {
+            int i=0;
+            totalSpins = 0;
+            do
+            {
+                totalSpins+=playerData[i].spins;
+                totalSpins+=playerData[i].passedSpins;
+                i++;
+            }while(i<3);
 
+            return totalSpins;
+        }
         public string getPlayerName(int playerID)
         {
             return playerData[playerID-1].name;

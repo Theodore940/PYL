@@ -33,10 +33,10 @@ namespace PressYourLuck
         
         int[] score = new int[18];
         int numOfRounds = 1;
-        int playerCount = 3;
+        int numOfQuestions = 1;
+        int playerCount;
         int playerIDnum = 0;
         private bool wasClicked = false;
-        bool roundTwo = false; //changes to true after first Big Board play is done
         private int randomNum;
         public PressYourLuckGameForm()
         {
@@ -68,7 +68,7 @@ namespace PressYourLuck
         {
             randomNum = randomNumber.Next(69);
             question.Text = dataStructureClass.getQuestion(randomNum);
-            MessageBox.Show("Player 1 turn to answer the question.","Round "+numOfRounds,MessageBoxButtons.OK ,MessageBoxIcon.Information);
+            MessageBox.Show("Player 1 turn to answer the question.","Round "+numOfRounds+" Question "+numOfQuestions,MessageBoxButtons.OK ,MessageBoxIcon.Information);
         }
         // this starts the game and sets all the name parameters 
         // and ask if users would like to understand the rules before
@@ -109,8 +109,7 @@ namespace PressYourLuck
             groupBox5.Visible = false;
             submitAnswer3.Visible = false;
             submitAnswer2.Visible = true;
-            playerCount = 2;
-            player = 2;
+            playerCount = player = 2;
         }
         // radio button if the users would like to play 3 people
         // and setting players to 3.
@@ -123,8 +122,7 @@ namespace PressYourLuck
             groupBox5.Visible = true;
             submitAnswer2.Visible = false;
             submitAnswer3.Visible = true;
-            playerCount = 3;
-            player = 3;
+            playerCount= player = 3;
         }
         // Asks the user if they would like to restart the game to play a new one.
         private void Restart_Click(object sender, EventArgs e)
@@ -165,14 +163,14 @@ namespace PressYourLuck
                     dataStructureClass.addPlayerSpins(1, -1);
                 }
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
-
+                Passed1.Text = dataStructureClass.getPlayerPassedSpins(1).ToString();
             }
-            if (dataStructureClass.getPlayerSpins(1) == 0)
+            if (dataStructureClass.getPlayerSpins(1) == 0 && 
+                dataStructureClass.getPlayerPassedSpins(1) == 0)
             {
                 player1spin.Enabled = false;
                 player2spin.Enabled = true;
             }
-
         }
         private void player1stop_Click(object sender, EventArgs e)
         {
@@ -183,6 +181,7 @@ namespace PressYourLuck
             pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(1, score[face]);
             Score1.Text = dataStructureClass.getPlayerScore(1).ToString();
+            roundTwo();
         }
         private void player1pass_Click(object sender, EventArgs e)
         {
@@ -223,8 +222,10 @@ namespace PressYourLuck
                     dataStructureClass.addPlayerSpins(2, -1);
                 }
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+                Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
             }
-            if (dataStructureClass.getPlayerSpins(2) == 0)
+            if (dataStructureClass.getPlayerSpins(2) == 0 &&
+                dataStructureClass.getPlayerPassedSpins(2) == 0)
             {
                 player2spin.Enabled = false;
                 player3spin.Enabled = true;
@@ -239,6 +240,7 @@ namespace PressYourLuck
             pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(2, score[face]);
             Score2.Text = dataStructureClass.getPlayerScore(2).ToString();
+            roundTwo();
         }
         private void player2pass_Click(object sender, EventArgs e)
         {
@@ -254,7 +256,7 @@ namespace PressYourLuck
                 Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
                 player3spin.Enabled = true;
             }
-            dataStructureClass.addPlayerPassedSpins(2, -(dataStructureClass.getPlayerSpins(2)));
+            dataStructureClass.addPlayerSpins(2, -(dataStructureClass.getPlayerSpins(2)));
             Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
             player2spin.Enabled = false;
             
@@ -278,7 +280,14 @@ namespace PressYourLuck
                     dataStructureClass.addPlayerSpins(3, -1);
                 }
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
+                Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
             }
+            if (dataStructureClass.getPlayerSpins(3) == 0 &&
+                dataStructureClass.getPlayerPassedSpins(3) == 0)
+            {
+                player3spin.Enabled = false;
+            }
+
         }
         private void player3stop_Click(object sender, EventArgs e)
         {
@@ -289,12 +298,13 @@ namespace PressYourLuck
             pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(3, score[face]);
             Score3.Text = dataStructureClass.getPlayerScore(3).ToString();
+            roundTwo();
         }
         private void player3pass_Click(object sender, EventArgs e)
         {
             if (dataStructureClass.getPlayerScore(2) >= dataStructureClass.getPlayerScore(1)) //player 2 has highest score
             {
-                dataStructureClass.addPlayerPassedSpins(2, dataStructureClass.getPlayerSpins(3));
+                dataStructureClass.addPlayerSpins(2, dataStructureClass.getPlayerSpins(3));
                 Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
                 player2spin.Enabled = true;
             }
@@ -316,18 +326,18 @@ namespace PressYourLuck
         //incorrect to earn spins. Also controls the 4 question rounds.
         private void submitAnswer3_Click(object sender, EventArgs e)
         {
-            if (numOfRounds <= 4)
+            if (numOfQuestions <= 4)
             {
                 Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
                 showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}\n Player 3: {2} "
                     , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2), dataStructureClass.getPlayerAns(3));
-                numOfRounds++;
+                numOfQuestions++;
                 for (int i = 1; i < 4; i++)
                     dataStructureClass.checkAnswer(i, dataStructureClass.getAnswer(randomNum));
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
-                if (numOfRounds <= 4)
+                if (numOfQuestions <= 4)
                 {
                     getQuestionFromStruct();
                     playerSubmit.Enabled = true;
@@ -345,17 +355,17 @@ namespace PressYourLuck
         //incorrect to earn spins. Also controls the 4 question rounds.
         private void submitAnswer2_Click(object sender, EventArgs e)
         {
-            if (numOfRounds <= 4)
+            if (numOfQuestions <= 4)
             {
                 Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
                 showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}"
                     , dataStructureClass.getPlayerAns(1), dataStructureClass.getPlayerAns(2));
-                numOfRounds++;
+                numOfQuestions++;
                 for (int i = 1; i < 3; i++)
                     dataStructureClass.checkAnswer(i, dataStructureClass.getAnswer(randomNum));
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
-                if (numOfRounds <= 4)
+                if (numOfQuestions <= 4)
                 {
                     getQuestionFromStruct();
                     playerSubmit.Enabled = true;
@@ -377,9 +387,9 @@ namespace PressYourLuck
             dataStructureClass.setPlayerAnswer(playerIDnum, playerAnswers.Text.ToUpper());
             playerAnswers.Text = string.Empty;
             if (playerIDnum == 1)
-                MessageBox.Show("Player 2 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Player 2 turn to answer the question.", "Round "+numOfRounds+" Question "+numOfQuestions, MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (playerCount==1 && playerIDnum == 2)
-                MessageBox.Show("Player 3 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Player 3 turn to answer the question.", "Round " + numOfRounds + " Question " + numOfQuestions, MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (playerCount == 0)
                 playerSubmit.Enabled = false;
         }
@@ -398,7 +408,24 @@ namespace PressYourLuck
                 this.Close();
             }
         }
-
+        private void roundTwo()
+        {
+            if (dataStructureClass.getSpins() == 0)
+            {
+                numOfRounds++;
+                numOfQuestions = 1;
+                if (numOfRounds < 3)
+                {
+                    MessageBox.Show("Trivia Round " + numOfRounds, "Round " + numOfRounds);
+                    getQuestionFromStruct();
+                    playerSubmit.Enabled = true;
+                    playerIDnum = 0;
+                    playerCount = player;
+                }
+                else
+                    MessageBox.Show("Winner");//return winner here
+            }
+        }
 
 
 
