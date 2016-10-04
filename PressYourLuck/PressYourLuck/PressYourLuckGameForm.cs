@@ -30,11 +30,12 @@ namespace PressYourLuck
         private DataStructureClass dataStructureClass;
         WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
         PictureBox[] picBox = new PictureBox[18];
-        Image [] images = new Image[18];
+        
         int[] score = new int[18];
         int numOfRounds = 1;
         int playerCount = 3;
         int playerIDnum = 0;
+        private bool wasClicked = false;
         bool roundTwo = false; //changes to true after first Big Board play is done
         private int randomNum;
         public PressYourLuckGameForm()
@@ -42,26 +43,24 @@ namespace PressYourLuck
             InitializeComponent();
             wplayer.URL = "Game Show Music.mp3";
             wplayer.controls.play();
-            for (int i =0; i<18 ;i++)
-                images[i]=Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + (i+1) + ".png");
+            
             score[6] = 500;
             score[7] = 1250;
             score[8] = 1750;
             score[9] = 2250;
         }
         //
-        public void DisplayBoard(PictureBox [] picBox)
+        public void DisplayBoard(PictureBox[] picBox)
         {
             picBox = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, 
             pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, 
             pictureBox10, pictureBox11,pictureBox12,pictureBox13,pictureBox14,pictureBox15,
             pictureBox16,pictureBox17,pictureBox18};
-            
+
             for (int i = 0; i < 18; i++)
             {
                 int face = 1 + randomNumber.Next(17);
-                picBox[i].Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + face + ".png");
-
+                picBox[i].Image = dataStructureClass.images[face];
             }
         }
         //
@@ -76,21 +75,26 @@ namespace PressYourLuck
         // playing.
         private void startGame_Click(object sender, EventArgs e)
         {
-            DisplayBoard(picBox);
-            wplayer.controls.stop();
-            Name1.Text = playerNameText1.Text.ToUpper();
-            Name2.Text = playerNameText2.Text.ToUpper();
-            Name3.Text = playerNameText3.Text.ToUpper();
-            twoPlayer.Enabled = false;
-            threePlayer.Enabled = false;
-            startGame.Enabled = false;
-            gameFAQ();
-            dataStructureClass = new DataStructureClass(player);
-            dataStructureClass.setPlayerName(1,Name1.Text);
-            dataStructureClass.setPlayerName(2, Name2.Text);
-            if(player==3)
-                dataStructureClass.setPlayerName(3, Name3.Text);
-            getQuestionFromStruct();
+            if (wasClicked == true)
+            {
+                dataStructureClass = new DataStructureClass(player);
+                DisplayBoard(picBox);
+                wplayer.controls.stop();
+                Name1.Text = playerNameText1.Text.ToUpper();
+                Name2.Text = playerNameText2.Text.ToUpper();
+                dataStructureClass.setPlayerName(1, Name1.Text);
+                dataStructureClass.setPlayerName(2, Name2.Text);
+                if (player == 3)
+                {
+                    Name3.Text = playerNameText3.Text.ToUpper();
+                    dataStructureClass.setPlayerName(3, Name3.Text);
+                }
+                gameFAQ();
+                twoPlayer.Enabled = false;
+                threePlayer.Enabled = false;
+                startGame.Enabled = false;
+                getQuestionFromStruct();
+            }
            
         }
 
@@ -98,6 +102,7 @@ namespace PressYourLuck
         // and setting players to 2.
         private void twoPlayer_CheckedChanged(object sender, EventArgs e)
         {
+            wasClicked = true;
             playerNameText1.Enabled = true;
             playerNameText2.Enabled = true;
             playerNameText3.Enabled = false;
@@ -111,6 +116,7 @@ namespace PressYourLuck
         // and setting players to 3.
         private void threePlayer_CheckedChanged(object sender, EventArgs e)
         {
+            wasClicked = true;
             playerNameText1.Enabled = true;
             playerNameText2.Enabled = true;
             playerNameText3.Enabled = true;
@@ -167,7 +173,7 @@ namespace PressYourLuck
             player1stop.Visible = false;
             player1spin.Visible = true;
             int face = 7 + randomNumber.Next(3);
-            pictureBox19.Image = images[face];
+            pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(1, score[face]);
             Score1.Text = dataStructureClass.getPlayerScore(1).ToString();
         }
@@ -177,15 +183,19 @@ namespace PressYourLuck
             {
                 dataStructureClass.addPlayerPassedSpins(2, dataStructureClass.getPlayerSpins(1));
                 Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
+                player2spin.Enabled = true;
             }
             else //player 3 has highest score
             {
                 dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(1));
                 Passed2.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
+                player3spin.Enabled = true;
+
             }
             dataStructureClass.addPlayerSpins(1, -(dataStructureClass.getPlayerSpins(1)));
             Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
-            play1spin.Enabled = false;
+            player1spin.Enabled = false;
+            
         }
         private void player2spin_Click(object sender, EventArgs e)
         {
@@ -212,7 +222,7 @@ namespace PressYourLuck
             player2stop.Visible = false;
             player2spin.Visible = true;
             int face = 7 + randomNumber.Next(3);
-            pictureBox19.Image = images[face];
+            pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(2, score[face]);
             Score2.Text = dataStructureClass.getPlayerScore(2).ToString();
         }
@@ -222,11 +232,13 @@ namespace PressYourLuck
             {
                 dataStructureClass.addPlayerPassedSpins(1, dataStructureClass.getPlayerSpins(2));
                 Passed1.Text = dataStructureClass.getPlayerPassedSpins(1).ToString();
+                player1spin.Enabled = true;
             }
             else //Player 3 has highest score
             {
                 dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(1));
                 Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
+                player3spin.Enabled = true;
             }
             dataStructureClass.addPlayerPassedSpins(2, -(dataStructureClass.getPlayerSpins(2)));
             Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
@@ -253,7 +265,7 @@ namespace PressYourLuck
             player3stop.Visible = false;
             player3spin.Visible = true;
             int face = 7 + randomNumber.Next(3);
-            pictureBox19.Image = images[face];
+            pictureBox19.Image = dataStructureClass.images[face];
             dataStructureClass.addPlayerScore(3, score[face]);
             Score3.Text = dataStructureClass.getPlayerScore(3).ToString();
         }
@@ -263,15 +275,16 @@ namespace PressYourLuck
             {
                 dataStructureClass.addPlayerPassedSpins(2, dataStructureClass.getPlayerSpins(3));
                 Passed2.Text = dataStructureClass.getPlayerPassedSpins(2).ToString();
+                player2spin.Enabled = true;
             }
             else //player 1 has highest score
             {
                 dataStructureClass.addPlayerPassedSpins(1, dataStructureClass.getPlayerSpins(3));
                 Passed1.Text = dataStructureClass.getPlayerPassedSpins(1).ToString();
+                player1spin.Enabled = true;
             }
             dataStructureClass.addPlayerSpins(3, -(dataStructureClass.getPlayerSpins(3)));
             Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
-            player3spin.Enabled = false;
         }
         //button that quits the game
         private void quitGame_Click(object sender, EventArgs e)

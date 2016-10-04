@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.IO;
 
 namespace PressYourLuck
 {
@@ -17,6 +19,7 @@ namespace PressYourLuck
         private List<string> questions; 
         private List<string> answers;
         private player[] playerData;
+        public Image[] images = new Image[18];
 
         public DataStructureClass(int players)
         {
@@ -24,6 +27,9 @@ namespace PressYourLuck
             playerData = new player[3];
             questions = new List<string>{};
             answers = new List<string>{};
+
+            for (int i = 0; i < 18; i++)
+                images[i] = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + (i + 1) + ".png");
 
             string line;
 
