@@ -64,13 +64,15 @@ namespace PressYourLuck
             }
         }
         //
-        private void gameLogic()
+        private void getQuestionFromStruct()
         {
-            randomNum = randomNumber.Next(22);
+            randomNum = randomNumber.Next(69);
             question.Text = dataStructureClass.getQuestion(randomNum);
             MessageBox.Show("Player 1 turn to answer the question.","Round "+numOfRounds,MessageBoxButtons.OK ,MessageBoxIcon.Information);
         }
-        //
+        // this starts the game and sets all the name parameters 
+        // and ask if users would like to understand the rules before
+        // playing.
         private void startGame_Click(object sender, EventArgs e)
         {
             DisplayBoard(picBox);
@@ -78,32 +80,21 @@ namespace PressYourLuck
             Name1.Text = playerNameText1.Text.ToUpper();
             Name2.Text = playerNameText2.Text.ToUpper();
             Name3.Text = playerNameText3.Text.ToUpper();
-
             twoPlayer.Enabled = false;
             threePlayer.Enabled = false;
             startGame.Enabled = false;
-            var results = MessageBox.Show("Would you like to learn how to play before you begin?", 
-                "Welcome to Press Your Luck", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (results == DialogResult.Yes)
-            {
-                string text = System.IO.File.ReadAllText("Game FAQ.txt");
-                MessageBox.Show(text,"Game FAQ");
-            }
-            else if (results == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            gameFAQ();
             dataStructureClass = new DataStructureClass(player);
             dataStructureClass.setPlayerName(1,Name1.Text);
             dataStructureClass.setPlayerName(2, Name2.Text);
-
             if(player==3)
                 dataStructureClass.setPlayerName(3, Name3.Text);
-            gameLogic();
+            getQuestionFromStruct();
            
         }
-        //
+
+        // radio button if the users would like to play 2 people
+        // and setting players to 2.
         private void twoPlayer_CheckedChanged(object sender, EventArgs e)
         {
             playerNameText1.Enabled = true;
@@ -115,7 +106,8 @@ namespace PressYourLuck
             playerCount = 2;
             player = 2;
         }
-        //
+        // radio button if the users would like to play 3 people
+        // and setting players to 3.
         private void threePlayer_CheckedChanged(object sender, EventArgs e)
         {
             playerNameText1.Enabled = true;
@@ -127,7 +119,7 @@ namespace PressYourLuck
             playerCount = 3;
             player = 3;
         }
-        //
+        // Asks the user if they would like to restart the game to play a new one.
         private void Restart_Click(object sender, EventArgs e)
         {
             const string message = "Play Again? ";
@@ -143,12 +135,16 @@ namespace PressYourLuck
             }
 
         }
-        //
+        // These next few button event help the players 
+        // control their spins/stop of the bigboard or 
+        // if they want to pass their spins off to the 
+        // next person
         private void player1spin_Click(object sender, EventArgs e)
         {
             if (dataStructureClass.getPlayerSpins(1) > 0 || 
                 dataStructureClass.getPlayerPassedSpins(1) > 0)
             {
+                DisplayBoard(picBox);
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
                 player1spin.Visible = false;
@@ -164,7 +160,6 @@ namespace PressYourLuck
             }
 
         }
-        //
         private void player1stop_Click(object sender, EventArgs e)
         {
             wplayer.controls.stop();
@@ -175,17 +170,16 @@ namespace PressYourLuck
             dataStructureClass.addPlayerScore(1, score[face]);
             Score1.Text = dataStructureClass.getPlayerScore(1).ToString();
         }
-        //
         private void player1pass_Click(object sender, EventArgs e)
         {
 
         }
-        //
         private void player2spin_Click(object sender, EventArgs e)
         {
             if (dataStructureClass.getPlayerSpins(2) > 0 || 
                 dataStructureClass.getPlayerPassedSpins(2) > 0)
             {
+                DisplayBoard(picBox);
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
                 player2spin.Visible = false;
@@ -218,6 +212,7 @@ namespace PressYourLuck
             if (dataStructureClass.getPlayerSpins(3) > 0 || 
                 dataStructureClass.getPlayerPassedSpins(3) > 0)
             {
+                DisplayBoard(picBox);
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
                 player3spin.Visible = false;
@@ -238,17 +233,18 @@ namespace PressYourLuck
         }
         private void player3pass_Click(object sender, EventArgs e)
         {
-
+     
         }
-
+        //button that quits the game
         private void quitGame_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        //This button lets 3-players submit their answers to check if they got it correct or
+        //incorrect to earn spins. Also controls the 4 question rounds.
         private void submitAnswer3_Click(object sender, EventArgs e)
         {
-            if (numOfRounds <= 3)
+            if (numOfRounds <= 4)
             {
                 Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
                 showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}\n Player 3: {2} "
@@ -259,23 +255,25 @@ namespace PressYourLuck
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
-                if (numOfRounds <= 3)
+                if (numOfRounds <= 4)
                 {
-                    gameLogic();
+                    getQuestionFromStruct();
                     playerSubmit.Enabled = true;
                     playerIDnum = 0;
                     playerCount = 3;
                 }
                 else
                 {
-                    MessageBox.Show("Time for the big board!");
+                    MessageBox.Show("Big board round!");
                     player1spin.Enabled = true;
                 }
             }
         }
+        //This button let 2-players submit their answers to check if they got it correct or
+        //incorrect to earn spins. Also controls the 4 question rounds.
         private void submitAnswer2_Click(object sender, EventArgs e)
         {
-            if (numOfRounds <= 3)
+            if (numOfRounds <= 4)
             {
                 Answer.Text = "Correct Answer: " + dataStructureClass.getAnswer(randomNum);
                 showPlayerAnswers.Text = String.Format(" Player 1: {0}\n Player 2: {1}"
@@ -285,36 +283,49 @@ namespace PressYourLuck
                     dataStructureClass.checkAnswer(i, dataStructureClass.getAnswer(randomNum));
                 Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
                 Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
-                if (numOfRounds <= 3)
+                if (numOfRounds <= 4)
                 {
-                    gameLogic();
+                    getQuestionFromStruct();
                     playerSubmit.Enabled = true;
                     playerIDnum = 0;
                     playerCount = 2;
                 }
                 else
                 {
-                    MessageBox.Show("Time for the big board!");
+                    MessageBox.Show("Big board round!");
                     player1spin.Enabled = true;
                 }
             }
         }
-
+        //lets the player submit and store their answers
         private void playerSubmit_Click(object sender, EventArgs e)
         {
             playerIDnum++;
+            playerCount--;
             dataStructureClass.setPlayerAnswer(playerIDnum, playerAnswers.Text.ToUpper());
             playerAnswers.Text = string.Empty;
             if (playerIDnum == 1)
                 MessageBox.Show("Player 2 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (playerIDnum == 2)
+            if (playerCount==1 && playerIDnum == 2)
                 MessageBox.Show("Player 3 turn to answer the question.", "Round "+numOfRounds, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            playerCount--;
             if (playerCount == 0)
                 playerSubmit.Enabled = false;
         }
-
+        private void gameFAQ()
+        {
+            var results = MessageBox.Show("Would you like to learn how to play before you begin?",
+                "Welcome to Press Your Luck",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (results == DialogResult.Yes)
+            {
+                string text = System.IO.File.ReadAllText("Game FAQ.txt");
+                MessageBox.Show(text, "Game FAQ");
+            }
+            else if (results == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
 
 
 

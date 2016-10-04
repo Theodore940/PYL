@@ -75,7 +75,7 @@ namespace PressYourLuck
             }
             else{ return "";}
         }
-    
+
         public string getPlayerName(int playerID)
         {
             return playerData[playerID-1].name;
