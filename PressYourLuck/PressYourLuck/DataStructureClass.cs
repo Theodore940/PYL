@@ -125,6 +125,11 @@ namespace PressYourLuck
         {
             playerData[playerID-1].passedSpins += numSpins;
         }
+
+        public void ResetScore(int playerID)
+        {
+            playerData[playerID-1].score = 0;
+        }
                 
     }
 }

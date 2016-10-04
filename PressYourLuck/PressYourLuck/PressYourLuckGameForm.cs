@@ -35,6 +35,7 @@ namespace PressYourLuck
         int numOfRounds = 1;
         int playerCount = 3;
         int playerIDnum = 0;
+        bool roundTwo = false; //changes to true after first Big Board play is done
         private int randomNum;
         public PressYourLuckGameForm()
         {
@@ -184,6 +185,7 @@ namespace PressYourLuck
             }
             dataStructureClass.addPlayerSpins(1, -(dataStructureClass.getPlayerSpins(1)));
             Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
+            play1spin.Enabled = false;
         }
         private void player2spin_Click(object sender, EventArgs e)
         {
@@ -228,6 +230,7 @@ namespace PressYourLuck
             }
             dataStructureClass.addPlayerPassedSpins(2, -(dataStructureClass.getPlayerSpins(2)));
             Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+            player2spin.Enabled = false;
             
         }
         private void player3spin_Click(object sender, EventArgs e)
@@ -268,6 +271,7 @@ namespace PressYourLuck
             }
             dataStructureClass.addPlayerSpins(3, -(dataStructureClass.getPlayerSpins(3)));
             Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
+            player3spin.Enabled = false;
         }
         //button that quits the game
         private void quitGame_Click(object sender, EventArgs e)
