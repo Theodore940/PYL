@@ -423,7 +423,7 @@ namespace PressYourLuck
                     playerCount = player;
                 }
                 else
-                    MessageBox.Show("Winner");//return winner here
+                    MessageBox.Show(dataStructureClass.ToString());//return winner here
             }
         }
 

@@ -149,6 +149,22 @@ namespace PressYourLuck
         {
             playerData[playerID-1].score = 0;
         }
-                
+
+        public override string ToString()
+        {
+            string str, winner ="";
+            int highScore = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if(playerData[i].score > highScore)
+                {
+                    highScore = playerData[i].score ; 
+                    winner = playerData[i].name;
+                }
+            }
+            str = "Winner is: " + winner + "\nScore: " + highScore;
+            return str;
+        }
+        
     }
 }
