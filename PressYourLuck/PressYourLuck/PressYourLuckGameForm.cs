@@ -475,15 +475,15 @@ namespace PressYourLuck
                 {
                     player2spin.Enabled = false;
                     player2pass.Enabled = false;
-                    if (dataStructureClass.getPlayerSpins(1) == 0 && dataStructureClass.getPlayerPassedSpins(1) == 0)
+                    if (dataStructureClass.getPlayerSpins(3) == 0 && dataStructureClass.getPlayerPassedSpins(3) == 0)
                     {
-                        player3pass.Enabled = true;
-                        player3spin.Enabled = true;
+                        player1pass.Enabled = true;
+                        player1spin.Enabled = true;
                     }
                     else
                     {
-                        player1spin.Enabled = true;
-                        player1pass.Enabled = true;
+                        player3spin.Enabled = true;
+                        player3pass.Enabled = true;
                     }
 
                 }
@@ -491,15 +491,15 @@ namespace PressYourLuck
                 {
                     player3spin.Enabled = false;
                     player3pass.Enabled = false;
-                    if (dataStructureClass.getPlayerSpins(2) == 0 && dataStructureClass.getPlayerPassedSpins(2) == 0)
+                    if (dataStructureClass.getPlayerSpins(1) == 0 && dataStructureClass.getPlayerPassedSpins(1) == 0)
                     {
-                        player1pass.Enabled = true;
-                        player1spin.Enabled = true;
+                        player2pass.Enabled = true;
+                        player2spin.Enabled = true;
                     }
                     else
                     {
-                        player2spin.Enabled = true;
-                        player2pass.Enabled = true;
+                        player1spin.Enabled = true;
+                        player1pass.Enabled = true;
                     }
     
                 }
