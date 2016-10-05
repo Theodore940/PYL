@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PressYourLuckGameForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -53,7 +52,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.submitAnswer2 = new System.Windows.Forms.Button();
             this.quitGame = new System.Windows.Forms.Button();
-            this.submitAnswer3 = new System.Windows.Forms.Button();
             this.newGame = new System.Windows.Forms.Button();
             this.playerNameText3 = new System.Windows.Forms.TextBox();
             this.playerNameText2 = new System.Windows.Forms.TextBox();
@@ -64,7 +62,6 @@
             this.threePlayer = new System.Windows.Forms.RadioButton();
             this.twoPlayer = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.player1stop = new System.Windows.Forms.Button();
             this.player1spin = new System.Windows.Forms.Button();
@@ -93,7 +90,6 @@
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.Score3 = new System.Windows.Forms.Label();
             this.Name3 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Trivia = new System.Windows.Forms.GroupBox();
             this.showPlayerAnswers = new System.Windows.Forms.Label();
             this.playerSubmit = new System.Windows.Forms.Button();
@@ -352,7 +348,6 @@
             // 
             this.groupBox1.Controls.Add(this.submitAnswer2);
             this.groupBox1.Controls.Add(this.quitGame);
-            this.groupBox1.Controls.Add(this.submitAnswer3);
             this.groupBox1.Controls.Add(this.newGame);
             this.groupBox1.Controls.Add(this.playerNameText3);
             this.groupBox1.Controls.Add(this.playerNameText2);
@@ -372,7 +367,8 @@
             // 
             // submitAnswer2
             // 
-            this.submitAnswer2.Location = new System.Drawing.Point(6, 77);
+            this.submitAnswer2.Enabled = false;
+            this.submitAnswer2.Location = new System.Drawing.Point(6, 104);
             this.submitAnswer2.Name = "submitAnswer2";
             this.submitAnswer2.Size = new System.Drawing.Size(85, 23);
             this.submitAnswer2.TabIndex = 3;
@@ -382,7 +378,7 @@
             // 
             // quitGame
             // 
-            this.quitGame.Location = new System.Drawing.Point(6, 105);
+            this.quitGame.Location = new System.Drawing.Point(6, 76);
             this.quitGame.Margin = new System.Windows.Forms.Padding(2);
             this.quitGame.Name = "quitGame";
             this.quitGame.Size = new System.Drawing.Size(85, 23);
@@ -391,26 +387,16 @@
             this.quitGame.UseVisualStyleBackColor = true;
             this.quitGame.Click += new System.EventHandler(this.quitGame_Click);
             // 
-            // submitAnswer3
-            // 
-            this.submitAnswer3.Location = new System.Drawing.Point(6, 76);
-            this.submitAnswer3.Margin = new System.Windows.Forms.Padding(2);
-            this.submitAnswer3.Name = "submitAnswer3";
-            this.submitAnswer3.Size = new System.Drawing.Size(85, 23);
-            this.submitAnswer3.TabIndex = 3;
-            this.submitAnswer3.Text = "Submit Answer";
-            this.submitAnswer3.UseVisualStyleBackColor = true;
-            this.submitAnswer3.Click += new System.EventHandler(this.submitAnswer3_Click);
-            // 
             // newGame
             // 
+            this.newGame.Enabled = false;
             this.newGame.Location = new System.Drawing.Point(6, 48);
             this.newGame.Name = "newGame";
             this.newGame.Size = new System.Drawing.Size(85, 23);
             this.newGame.TabIndex = 2;
             this.newGame.Text = "New Game";
             this.newGame.UseVisualStyleBackColor = true;
-            this.newGame.Click += new System.EventHandler(this.Restart_Click);
+            this.newGame.Click += new System.EventHandler(this.newGame_Click);
             // 
             // playerNameText3
             // 
@@ -556,6 +542,7 @@
             // 
             // player1pass
             // 
+            this.player1pass.Enabled = false;
             this.player1pass.Location = new System.Drawing.Point(158, 151);
             this.player1pass.Name = "player1pass";
             this.player1pass.Size = new System.Drawing.Size(75, 23);
@@ -659,6 +646,7 @@
             // 
             // player2pass
             // 
+            this.player2pass.Enabled = false;
             this.player2pass.Location = new System.Drawing.Point(162, 151);
             this.player2pass.Name = "player2pass";
             this.player2pass.Size = new System.Drawing.Size(75, 23);
@@ -776,6 +764,7 @@
             // 
             // player3pass
             // 
+            this.player3pass.Enabled = false;
             this.player3pass.Location = new System.Drawing.Point(164, 151);
             this.player3pass.Name = "player3pass";
             this.player3pass.Size = new System.Drawing.Size(75, 23);
@@ -841,10 +830,6 @@
             this.Name3.Text = "Name3";
             this.Name3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            // 
             // Trivia
             // 
             this.Trivia.Controls.Add(this.showPlayerAnswers);
@@ -872,6 +857,7 @@
             // 
             // playerSubmit
             // 
+            this.playerSubmit.Enabled = false;
             this.playerSubmit.Location = new System.Drawing.Point(150, 124);
             this.playerSubmit.Name = "playerSubmit";
             this.playerSubmit.Size = new System.Drawing.Size(75, 23);
@@ -904,13 +890,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 543);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(810, 515);
             this.Controls.Add(this.Trivia);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "PressYourLuckGameForm";
             this.Text = "Press Your Luck";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -971,7 +960,6 @@
         private System.Windows.Forms.Button startGame;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -999,7 +987,6 @@
         private System.Windows.Forms.TextBox playerNameText2;
         private System.Windows.Forms.TextBox playerNameText1;
         private System.Windows.Forms.Button newGame;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button player1spin;
         private System.Windows.Forms.Button player1pass;
         private System.Windows.Forms.Button player2spin;
@@ -1013,7 +1000,6 @@
         private System.Windows.Forms.Label question;
         private System.Windows.Forms.Label Answer;
         private System.Windows.Forms.Button quitGame;
-        private System.Windows.Forms.Button submitAnswer3;
         private System.Windows.Forms.TextBox playerAnswers;
         private System.Windows.Forms.Button playerSubmit;
         private System.Windows.Forms.Label showPlayerAnswers;

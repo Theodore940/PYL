@@ -1,4 +1,14 @@
-﻿using System;
+﻿//*****************************************************************
+//                   Project #1 Press Your Luck
+//                   Name: Nathan Ho & Ryan Luig
+//                   CPL Date: 10/06/2016
+//*****************************************************************
+//    DataStructureClass: This class handles data from player's
+//    name, answers, scores, spins, spins passed, and image array
+//    as well as its data array.
+//      
+//*****************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +29,28 @@ namespace PressYourLuck
         private List<string> questions; 
         private List<string> answers;
         private player[] playerData;
-        public Image[] images = new Image[18];
+        public Image[] images = new Image[19];
+        public int[] score = new int[19];
+        private int tempValue;
         private int totalSpins;
-
         public DataStructureClass(int players)
         {
             numPlayers = players;
             playerData = new player[3];
             questions = new List<string>{};
             answers = new List<string>{};
-
+            //Load array of 18 images of the tile for bigboard
             for (int i = 0; i < 18; i++)
-                images[i] = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + (i + 1) + ".png");
-
+                images[i] = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + i + ".png");
+            //Load data array of the 18 images values for bigboard
+            for(int j=0;j<15;j++)
+            {
+                tempValue += 100;
+                score[j] = tempValue;
+            }
+            //Load whammy data.
+            for (int k = 0; k < 4; k++)
+                score[k + 15] = -1;
             string line;
 
             //load question and answers from file
@@ -45,7 +64,6 @@ namespace PressYourLuck
                 answers.Add(line.ToUpper());
             }
         }
-
         //takes the player id and a string containing the correct answer
         //as parameters and checks the ans stored in that player's PlayerData index
         //as ans
@@ -61,8 +79,14 @@ namespace PressYourLuck
                 addPlayerSpins(PlayerId, 1); //1 spin for incorrect answer
             }
         }
-
-
+        public bool checkPlayerAnswer(int PlayerId, string answer)
+        {
+            if (playerData[PlayerId-1].ans == answer)
+                return true;
+            else
+                return false;
+        }
+        //retrive question from array list
         public string getQuestion(int index)
         {
             index = index % questions.Capacity;
@@ -72,7 +96,7 @@ namespace PressYourLuck
             }
             else { return "";}
         }
-
+        // retrive answer from array list
         public string getAnswer(int index)
         {
             index = index % questions.Capacity;
@@ -82,6 +106,7 @@ namespace PressYourLuck
             }
             else{ return "";}
         }
+        // Return total amount of spins of all players
         public int getSpins()
         {
             int i=0;
@@ -95,61 +120,79 @@ namespace PressYourLuck
 
             return totalSpins;
         }
+        // getter:Player with lowest spins
+        public int getLowestSpinsPlayer(int players)
+        {
+            int player = 0;
+            int[] inputs=new int[players];
+            for (int i = 0; i < players; i++)
+                inputs[i] = playerData[i].spins;
+            int lowest = inputs[0];
+            foreach (var input in inputs)
+                if (input < lowest) lowest = input;
+            for (int j = players-1; j >= 0;j-- )
+            {
+                if (inputs[j] == lowest)
+                    player = j+1;
+            }
+            return player;
+        }
+        // getter:Player Name
         public string getPlayerName(int playerID)
         {
             return playerData[playerID-1].name;
         }
-
+        // getter:Player Score 
         public int getPlayerScore (int playerID)
         {
             return playerData[playerID-1].score;
         }
-
+        // getter:Player Spins
         public int getPlayerSpins(int playerID)
         {
             return playerData[playerID-1].spins;
         }
-
+        // getter:Player Passed Spins
         public int getPlayerPassedSpins(int playerID)
         {
             return playerData[playerID-1].passedSpins;
         }
-
+        // getter:Player Answer
         public string getPlayerAns(int playerID)
         {
             return playerData[playerID - 1].ans;
         }
-
+        // setter:Player Score
         public void addPlayerScore(int playerID, int addScore)
         {
             playerData[playerID-1].score += addScore;
         }
-            
+        // setter:Player Name    
         public void setPlayerName(int playerID, string playerName)
         {
             playerData[playerID - 1].name = playerName;
         }
-
+        // setter:Player Answer
         public void setPlayerAnswer(int playerID, string playerAns)
         {
             playerData[playerID - 1].ans = playerAns.ToUpper();
         }
-
+        // setter:Player Spins
         public void addPlayerSpins(int playerID, int numSpins)
         {
             playerData[playerID-1].spins += numSpins;
         }
-            
+        // setter:Player Passed Spins
         public void addPlayerPassedSpins(int playerID, int numSpins)
         {
             playerData[playerID-1].passedSpins += numSpins;
         }
-
+        // Whammy reset
         public void ResetScore(int playerID)
         {
             playerData[playerID-1].score = 0;
         }
-
+        // overloaded ToString for winner 
         public override string ToString()
         {
             string str, winner ="";
