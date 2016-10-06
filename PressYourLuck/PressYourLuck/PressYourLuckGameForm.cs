@@ -208,7 +208,7 @@ namespace PressYourLuck
                 }
                 else //Player 3 has highest score
                 {
-                    dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(1));
+                    dataStructureClass.addPlayerPassedSpins(3, dataStructureClass.getPlayerSpins(2));
                     Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
                     player3spin.Enabled = true;
                 }
@@ -407,7 +407,9 @@ namespace PressYourLuck
                     dataStructureClass.addPlayerScore(player, dataStructureClass.score[face]);
             }
         }
-        //
+        // This method take in a playerID and handles each player 
+        // spin button has been hit. It controls the bigboard randomize 
+        // and display a value the player lands on.
         private void handleSpin(int player)
         {
 
