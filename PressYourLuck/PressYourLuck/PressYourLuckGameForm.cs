@@ -42,21 +42,22 @@ namespace PressYourLuck
             InitializeComponent();
             wplayer.URL = "Game Show Music.mp3";
             wplayer.controls.play();
-        }
-        //Randomizes the bigboard whened called
-        public void DisplayBoard(PictureBox[] picBox)
-        {
             picBox = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, 
             pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, 
             pictureBox10, pictureBox11,pictureBox12,pictureBox13,pictureBox14,pictureBox15,
             pictureBox16,pictureBox17,pictureBox18};
-
+        }
+        //Randomizes the bigboard whened called
+        public void DisplayBoard(PictureBox[] picBox)
+        {
             for (int i = 0; i < 18; i++)
             {
-                int face = 1 + randomNumber.Next(17);
+                int face = 1 + randomNumber.Next(23);
                 picBox[i].Image = dataStructureClass.images[face];
             }
+            
         }
+
         //Display the next question for trivia round
         private void getQuestionFromStruct()
         {
@@ -152,6 +153,7 @@ namespace PressYourLuck
             player1spin.Visible = true;
             handleScore(1);
             Score1.Text = "$" + dataStructureClass.getPlayerScore(1).ToString();
+            wasClicked = false;
             roundTwo();
         }
         private void player1pass_Click(object sender, EventArgs e)
@@ -391,13 +393,24 @@ namespace PressYourLuck
         // or subtracting all money due to whammies.
         private void handleScore(int player)
         {
-            int face = randomNumber.Next(18);
+            int face = randomNumber.Next(23);
             pictureBox19.Image = dataStructureClass.images[face];
             if (dataStructureClass.score[face] == -1)
             {
                 wplayer.URL = "Whammy Sound.mp3";
                 wplayer.controls.play();
                 dataStructureClass.ResetScore(player);
+            }
+            else if(12<=face && face<=19)
+            {
+                dataStructureClass.addPlayerScore(player, dataStructureClass.score[face]);
+                dataStructureClass.addPlayerSpins(player, 1);
+                if(player ==1)
+                    Earned1.Text = dataStructureClass.getPlayerSpins(1).ToString();
+                else if(player ==2)
+                    Earned2.Text = dataStructureClass.getPlayerSpins(2).ToString();
+                else
+                    Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
             }
             else
             {
@@ -416,7 +429,9 @@ namespace PressYourLuck
             if (dataStructureClass.getPlayerSpins(player) > 0 ||
                 dataStructureClass.getPlayerPassedSpins(player) > 0)
             {
+
                 DisplayBoard(picBox);
+
                 pictureBox19.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Press_Your_Luck.png");
                 wplayer.URL = "PYL Board.mp3";
                 wplayer.controls.play();
@@ -453,6 +468,7 @@ namespace PressYourLuck
                 Earned3.Text = dataStructureClass.getPlayerSpins(3).ToString();
                 Passed3.Text = dataStructureClass.getPlayerPassedSpins(3).ToString();
             }
+            
             if (dataStructureClass.getPlayerSpins(player) == 0 &&
                 dataStructureClass.getPlayerPassedSpins(player) == 0)
             {

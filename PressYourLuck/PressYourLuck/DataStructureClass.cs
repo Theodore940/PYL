@@ -29,9 +29,9 @@ namespace PressYourLuck
         private List<string> questions; 
         private List<string> answers;
         private player[] playerData;
-        public Image[] images = new Image[19];
-        public int[] score = new int[19];
-        private int tempValue;
+        public Image[] images = new Image[24];
+        public int[] score = new int[24];
+        private int tempValue=250;
         private int totalSpins;
         public DataStructureClass(int players)
         {
@@ -40,17 +40,31 @@ namespace PressYourLuck
             questions = new List<string>{};
             answers = new List<string>{};
             //Load array of 18 images of the tile for bigboard
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i <= 23; i++)
                 images[i] = Image.FromFile(Directory.GetCurrentDirectory() + "\\Pictures\\Big Board\\" + i + ".png");
             //Load data array of the 18 images values for bigboard
-            for(int j=0;j<15;j++)
+            for(int j=0;j<9;j++)
             {
-                tempValue += 100;
+                tempValue += 250;
                 score[j] = tempValue;
             }
+            int temp = 2500;
+            for (int f = 0; f < 4;f++ )
+            {
+                temp += 500;
+                score[f+9]=temp;
+            }
+            score[12] = 500;
+            score[13] = 750;
+            score[14] = 1000;
+            score[15] = 1500;
+            score[16] = 2000;
+            score[17] = 2500;
+            score[18] = 3000;
+            score[19] = 4000;
             //Load whammy data.
             for (int k = 0; k < 4; k++)
-                score[k + 15] = -1;
+                score[k + 20] = -1;
             string line;
 
             //load question and answers from file
